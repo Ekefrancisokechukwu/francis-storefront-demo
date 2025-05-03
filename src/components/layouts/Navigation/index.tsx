@@ -12,8 +12,12 @@ const categories = ["Our store", "Desk", "Dinning rooms", "Beds"];
 const Navigation = () => {
   return (
     <nav className="px-5 py-2 sticky top-0 z-50  bg-white  shadow ">
-      <div className="flex items-center gap-x-16">
-        <div className="flex items-center gap-x-3  ">
+      <button className="md:hidden flex items-center gap-x-2  ">
+        <Logs size={20} /> Menu
+      </button>
+
+      <div className="md:flex hidden items-center gap-x-16 ">
+        <div className="flex  items-center gap-x-3  ">
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="outline-0 ring-0">
               <button className="flex items-center outline-0 ring-0 gap-x-4 cursor-pointer w-[17rem] pr-5 border-r">
