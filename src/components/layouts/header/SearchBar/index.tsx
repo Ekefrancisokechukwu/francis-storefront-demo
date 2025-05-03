@@ -8,7 +8,7 @@ const SearchBar = () => {
         placeholder="Search"
         className="w-full  text-sm text-neutral-800 outline-0 px-3 py-1"
       />
-      <button className="cursor-pointer">
+      <button name="search button" className="cursor-pointer">
         <Search className="text-neutral-800" />
       </button>
     </div>

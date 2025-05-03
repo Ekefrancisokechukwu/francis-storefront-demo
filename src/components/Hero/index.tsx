@@ -13,6 +13,7 @@ import "swiper/css/navigation";
 import { useRef } from "react";
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Wrapper } from "../ui/Wrapper";
 
 const sliderItems = [
   {
@@ -33,12 +34,13 @@ const HeroSection = () => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
-    <section className="mx-auto group max-w-[87rem] relative bg-neutral-100 rounded-lg ">
+    <Wrapper className=" group   relative  rounded-lg ">
       <Swiper
         spaceBetween={0}
         modules={[Navigation, Autoplay]}
         slidesPerView={1}
         loop={true}
+        speed={2000}
         autoplay={{
           delay: 4000,
           disableOnInteraction: false,
@@ -52,7 +54,7 @@ const HeroSection = () => {
               <div className="relative z-10  rounded-lg sm:py-[5rem] py-[2rem] sm:px-[2rem] px-[1rem]">
                 <div className="w-full absolute inset-0 -z-10 overflow-hidden rounded-lg">
                   <Image
-                    alt=""
+                    alt={slide.image}
                     src={slide.image}
                     fill
                     priority
@@ -91,7 +93,7 @@ const HeroSection = () => {
       >
         <ArrowRight />
       </button>
-    </section>
+    </Wrapper>
   );
 };
 
