@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Heart, ShoppingBag, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,7 +8,7 @@ const Product = () => {
       href={"#"}
       className="border border-transparent hover:border-border ease-out  transition-all duration-500 rounded max-w-[30rem] bg-white group/product"
     >
-      <div className="overflow-hidden">
+      <div className=" relative overflow-hidden">
         <div className="overflow-hidden relative w-full aspect-square rounded">
           <Image
             alt="demo"
@@ -24,7 +24,7 @@ const Product = () => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover absolute left-0 top-0 opacity-0 group-hover/product:opacity-100 transition-all duration-500"
           />
-          <div className="flex items-center gap-x-1   absolute bottom-0 left-4 opacity-0 transition-all duration-300 group-hover/product:opacity-100">
+          <div className="flex items-center gap-x-1  z-30  absolute bottom-0 left-4 opacity-0 transition-all duration-300 group-hover/product:opacity-100">
             <button
               style={{ background: "#d97706" }}
               className="size-[1.2rem]  grid border rounded-full"
@@ -38,6 +38,15 @@ const Product = () => {
               className="size-[1.2rem]  grid border rounded-full"
             />
           </div>
+        </div>
+
+        <div className=" right-4 -top-5 scale-90 opacity-0 group-hover/product:opacity-100 group-hover/product:top-6 group-hover/product:scale-100 transition-all duration-300 ease-smush z-20 flex  flex-col gap-y-1.5 absolute ">
+          <button className="border  hover:bg-neutral-900 hover:text-white transition-all duration-300  grid w-max p-2 rounded-full">
+            <Heart size={18} />
+          </button>
+          <button className="border hover:bg-neutral-900 hover:text-white transition-all duration-300   grid w-max p-2 rounded-full">
+            <ShoppingBag size={18} />
+          </button>
         </div>
       </div>
 
