@@ -40,13 +40,14 @@ const HeroSection = () => {
         modules={[Navigation, Autoplay]}
         slidesPerView={1}
         loop={true}
-        speed={2000}
+        speed={1500}
         autoplay={{
           delay: 4000,
           disableOnInteraction: false,
         }}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
+        className="!ease-smush"
       >
         {sliderItems.map((slide, i) => {
           return (
