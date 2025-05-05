@@ -5,7 +5,7 @@ import Link from "next/link";
 const Product = () => {
   return (
     <Link
-      href={"#"}
+      href={`/products/this-is-my-slug`}
       className="border border-transparent hover:border-border ease-out  transition-all duration-500 rounded max-w-[30rem] bg-white group/product"
     >
       <div className=" relative overflow-hidden">
