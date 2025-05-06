@@ -7,8 +7,9 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Wrapper } from "@/components/ui/Wrapper";
 import { SortNav } from "./SortNav";
+import { Filter } from "./Filter";
 
-const ColllectionsPage = () => {
+const CollectionsPage = () => {
   return (
     <div>
       <div className="bg-neutral-100 py-8 ">
@@ -26,9 +27,16 @@ const ColllectionsPage = () => {
         </Wrapper>
       </div>
       <Wrapper className="mt-8">
+        {/* Sort */}
         <SortNav />
+
+        {/* Products */}
+        <div className="mt-5 grid grid-cols-[15rem_1fr] gap-x-5">
+          <Filter />
+          <div></div>
+        </div>
       </Wrapper>
     </div>
   );
 };
-export default ColllectionsPage;
+export default CollectionsPage;
