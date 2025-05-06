@@ -9,6 +9,7 @@ import { Wrapper } from "@/components/ui/Wrapper";
 import { SortNav } from "./SortNav";
 import { Filter } from "./Filter";
 import { ProductsContianer } from "./ProductsContainer";
+import { OpenFilterAndSortBtn } from "./openFilterAndSortBtn";
 
 const CollectionsPage = () => {
   return (
@@ -29,7 +30,12 @@ const CollectionsPage = () => {
       </div>
       <Wrapper className="mt-8">
         {/* Sort */}
-        <SortNav />
+        <div className="flex items-center justify-between">
+          <div>
+            <OpenFilterAndSortBtn />
+          </div>
+          <SortNav />
+        </div>
 
         {/* Products */}
         <div className="mt-5 grid lg:grid-cols-[18rem_1fr] gap-x-7">

@@ -1,6 +1,6 @@
 import Product from "@/components/Product";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 export const ProductsContianer = () => {
   return (

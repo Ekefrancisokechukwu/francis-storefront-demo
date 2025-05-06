@@ -4,6 +4,7 @@ import { Price } from "./Price";
 import { Color } from "./Color";
 import { Brand } from "./Brand";
 import { ProductType } from "./ProductType";
+import { X } from "lucide-react";
 
 export const Filter = () => {
   return (
@@ -16,6 +17,14 @@ export const Filter = () => {
         >
           REMOVE ALL
         </Link>
+      </div>
+      <div className="mt-5 flex items-center gap-3">
+        <button className="cursor-pointer text-sm flex items-center gap-x-1">
+          <span className="p-0.5 rounded-full bg-rose-400 text-white">
+            <X size={13} />
+          </span>
+          Sofa
+        </button>
       </div>
       <div className="mt-8 space-y-6">
         <Availability />

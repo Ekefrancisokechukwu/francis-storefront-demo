@@ -28,7 +28,7 @@ export const Accordion = ({ content, title }: AccordionProps) => {
           )}
         />
       </button>
-      <AnimatePresence initial={false}>
+      <AnimatePresence>
         {isOpen && (
           <motion.div
             variants={{
@@ -39,7 +39,7 @@ export const Accordion = ({ content, title }: AccordionProps) => {
             initial="open"
             animate="open"
             exit="collapsed"
-            transition={{ duration: 0.2, ease: "easeIn" }}
+            transition={{ duration: 0.2, ease: "linear" }}
             className="overflow-hidden py-1.5  text-neutral-500"
           >
             {content}

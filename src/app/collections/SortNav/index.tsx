@@ -10,8 +10,8 @@ const sortOptions = [
 
 export const SortNav = () => {
   return (
-    <div className="flex justify-end gap-x-11 items-center">
-      <div className="">
+    <div className="flex  justify-end gap-x-11 items-center">
+      <div className="lg:block hidden">
         <div className="flex items-center gap-x-8">
           <label htmlFor="sort" className="text-sm font-medium">
             Sort By:
