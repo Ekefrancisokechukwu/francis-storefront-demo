@@ -31,8 +31,11 @@ const Navigation = () => {
                   <DropdownMenuItem
                     key={i}
                     className="capitalize !rounded-none p-3"
+                    asChild
                   >
-                    {category}
+                    <Link href={"/collections"} className="w">
+                      {category}
+                    </Link>
                   </DropdownMenuItem>
                 );
               })}
