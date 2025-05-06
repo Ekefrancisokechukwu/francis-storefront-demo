@@ -6,7 +6,7 @@ const Product = () => {
   return (
     <Link
       href={`/products/this-is-my-slug`}
-      className="border border-transparent hover:border-border ease-out  transition-all duration-500 rounded max-w-[30rem] bg-white group/product"
+      className="border border-transparent hover:border-border ease-out  transition-all duration-500 rounded block max-w-[20rem] bg-white group/product"
     >
       <div className=" relative overflow-hidden">
         <div className="overflow-hidden relative w-full aspect-square rounded">

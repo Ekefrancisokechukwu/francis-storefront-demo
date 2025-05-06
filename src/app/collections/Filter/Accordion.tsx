@@ -11,7 +11,7 @@ type AccordionProps = {
 };
 
 export const Accordion = ({ content, title }: AccordionProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div>
@@ -21,7 +21,7 @@ export const Accordion = ({ content, title }: AccordionProps) => {
       >
         <span className="font-semibold">{title}</span>
         <ChevronDown
-          size={20}
+          size={18}
           className={cn(
             "transition-all duration-300 ease-smush",
             isOpen ? "rotate-180" : "rotate-0"
@@ -36,10 +36,10 @@ export const Accordion = ({ content, title }: AccordionProps) => {
               collapsed: { opacity: 0, height: 0 },
             }}
             key="content"
-            initial="collapsed"
+            initial="open"
             animate="open"
             exit="collapsed"
-            transition={{ duration: 0.2, mass: 0.4, ease: "easeIn" }}
+            transition={{ duration: 0.2, ease: "easeIn" }}
             className="overflow-hidden py-1.5  text-neutral-500"
           >
             {content}

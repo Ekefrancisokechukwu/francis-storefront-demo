@@ -7,7 +7,7 @@ import { ProductType } from "./ProductType";
 
 export const Filter = () => {
   return (
-    <div>
+    <div className="border-r pr-5 lg:block hidden">
       <div className="flex items-center justify-between">
         <span className="font-semibold">Filter:</span>
         <Link
@@ -17,12 +17,11 @@ export const Filter = () => {
           REMOVE ALL
         </Link>
       </div>
-      <div className="mt-8 space-y-2.5">
+      <div className="mt-8 space-y-6">
         <Availability />
         <Price />
         <ProductType />
         <Color />
-
         <Brand />
       </div>
     </div>
