@@ -52,7 +52,7 @@ const Product = () => {
 
       <div className="px-4 mt-1.5 pb-2">
         <p className="text-sm text-neutral-400">Nikamal</p>
-        <p className="font-medium mt-2 text-neutral-700">
+        <p className="font-medium mt-2 min-[500px]:text-base text-sm text-neutral-700">
           Modern And Comfortable Acre Lounge Chair
         </p>
         <div className="mt-2.5 flex items-center">

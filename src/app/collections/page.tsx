@@ -9,7 +9,7 @@ import { Wrapper } from "@/components/ui/Wrapper";
 import { SortNav } from "./SortNav";
 import { Filter } from "./Filter";
 import { ProductsContianer } from "./ProductsContainer";
-import { OpenFilterAndSortBtn } from "./openFilterAndSortBtn";
+import { FilterAndSortSlider } from "./Filter/FilterAndSortSlider";
 
 const CollectionsPage = () => {
   return (
@@ -32,9 +32,14 @@ const CollectionsPage = () => {
         {/* Sort */}
         <div className="flex items-center justify-between">
           <div>
-            <OpenFilterAndSortBtn />
+            <FilterAndSortSlider />
           </div>
-          <SortNav />
+          <div className="flex gap-x-8 items-center">
+            <div className="lg:block hidden">
+              <SortNav />
+            </div>
+            <span className="font-semibold text-sm">22 products</span>
+          </div>
         </div>
 
         {/* Products */}

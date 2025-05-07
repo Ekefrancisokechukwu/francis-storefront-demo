@@ -72,7 +72,7 @@ export function ProductDetailsInfo() {
     <main className=" py-13">
       <div className="grid grid-cols-1 items-start md:grid-cols-2 gap-8">
         {/* Product Images Section */}
-        <div className="flex sticky top-10 md:border-r md:flex-row flex-col gap-y-4 gap-x-1.5  ">
+        <div className="flex md:sticky top-10 md:border-r md:flex-row flex-col gap-y-4 gap-x-1.5  ">
           {/* Thumbnails */}
           <div className="flex md:flex-col    gap-2 md:w-[6.5rem] w-full mx-auto order-2 md:order-1  ">
             <button
