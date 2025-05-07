@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Jost } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layouts/header";
 import Navigation from "@/components/layouts/Navigation";
 import Footer from "@/components/layouts/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
 });
 
@@ -28,14 +33,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jost.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
         <Header />
         <Navigation />
-        <div className=" min-h-screen   font-[family-name:var(--font-geist-sans)]">
-          {children}
-        </div>
+        <div className=" min-h-screen ">{children}</div>
         <Footer />
       </body>
     </html>
