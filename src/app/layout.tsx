@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layouts/header";
 import Navigation from "@/components/layouts/Navigation";
 import Footer from "@/components/layouts/footer";
+import ReactQueryProvider from "@/provider/react-query";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -36,10 +37,12 @@ export default function RootLayout({
         className={`${jost.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <Header />
-        <Navigation />
-        <div className=" min-h-screen ">{children}</div>
-        <Footer />
+        <ReactQueryProvider>
+          <Header />
+          <Navigation />
+          <div className=" min-h-screen ">{children}</div>
+          <Footer />
+        </ReactQueryProvider>
       </body>
     </html>
   );

@@ -45,7 +45,6 @@ const HeroSection = () => {
           delay: 4000,
           disableOnInteraction: false,
         }}
-        onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         className="!ease-smush"
       >

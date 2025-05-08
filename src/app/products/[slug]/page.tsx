@@ -1,12 +1,13 @@
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Wrapper } from "@/components/ui/Wrapper";
 import { ProductDetailsInfo } from "./productDetailsInfo";
+import Link from "next/link";
+import { productService } from "@/services/productService";
 
 const ProductDetailsPage = async ({
   params,
@@ -14,6 +15,8 @@ const ProductDetailsPage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
+
+  const product = await productService.getProduct(slug);
 
   return (
     <div>
@@ -23,10 +26,12 @@ const ProductDetailsPage = async ({
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                <Link href="/">Home</Link>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
-              <BreadcrumbItem className="capitalize">{slug}</BreadcrumbItem>
+              <BreadcrumbItem className="capitalize">
+                {product.name}
+              </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </Wrapper>
@@ -35,7 +40,7 @@ const ProductDetailsPage = async ({
       {/* Product details */}
 
       <Wrapper>
-        <ProductDetailsInfo />
+        <ProductDetailsInfo product={product} />
       </Wrapper>
     </div>
   );

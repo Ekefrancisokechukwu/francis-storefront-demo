@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Check, ChevronDown, ChevronUp, Eye, Heart, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Product } from "@/types/product";
 
 const productImages = [
   {
@@ -44,10 +45,14 @@ const colorOptions = [
   { id: 2, name: "Gray", value: "gray", hex: "#808080", selected: true },
 ];
 
-export function ProductDetailsInfo() {
+type ProductDetailsProps = {
+  product: Product;
+};
+
+export function ProductDetailsInfo({ product }: ProductDetailsProps) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState(2);
+  const [selectedColor, setSelectedColor] = useState("");
   const [inWishlist, setInWishlist] = useState(false);
 
   const decreaseQuantity = () => {
@@ -68,11 +73,39 @@ export function ProductDetailsInfo() {
     setInWishlist(!inWishlist);
   };
 
+  const checkStockStatus = (inStock: number) => {
+    switch (true) {
+      case inStock === 0:
+        return (
+          <>
+            <span className="inline-block size-2 ring-2 ring-offset-1 ring-red-500/30 bg-red-500 rounded-full mr-2"></span>
+            {inStock} Out of Stock
+          </>
+        );
+      case inStock <= 50:
+        return (
+          <>
+            <span className="inline-block size-2 ring-2 ring-offset-1 ring-neutral-400/30 bg-neutral-400 rounded-full mr-2"></span>
+            {inStock} Low Stock
+          </>
+        );
+      case inStock > 50:
+        return (
+          <>
+            <span className="inline-block size-2 ring-2 ring-offset-1 ring-green-500/30 bg-green-500 rounded-full mr-2"></span>
+            {inStock} In Stock
+          </>
+        );
+      default:
+        return "Unknown";
+    }
+  };
+
   return (
     <main className=" py-13">
-      <div className="grid grid-cols-1 items-start md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 items-start lg:grid-cols-2 gap-8">
         {/* Product Images Section */}
-        <div className="flex md:sticky top-10 md:border-r md:flex-row flex-col gap-y-4 gap-x-1.5  ">
+        <div className="flex lg:sticky top-10 md:border-r md:flex-row flex-col gap-y-4 gap-x-1.5  ">
           {/* Thumbnails */}
           <div className="flex md:flex-col    gap-2 md:w-[6.5rem] w-full mx-auto order-2 md:order-1  ">
             <button
@@ -85,19 +118,19 @@ export function ProductDetailsInfo() {
               <ChevronUp className="block md:hidden rotate-90" />
             </button>
 
-            <div className="md:h-[30rem] flex md:flex-col flex-row overflow-hidden  w-full">
-              {productImages.map((image, index) => (
+            <div className="md:max-h-[40rem] flex md:flex-col flex-row gap-y-2.5 overflow-hidden  w-full">
+              {product.images.map((image, index) => (
                 <div
-                  key={image.id}
+                  key={image.public_id}
                   className={cn(
-                    "border cursor-pointer relative shrink-0 rounded-md overflow-hidden  md:w-full w-[7rem] h-24 flex items-center justify-center",
+                    "border cursor-pointer hover:border-black relative shrink-0 rounded-md overflow-hidden  md:w-full w-[7rem] h-24 flex items-center justify-center",
                     selectedImage === index ? "border-black" : "border-gray-200"
                   )}
                   onClick={() => setSelectedImage(index)}
                 >
                   <Image
-                    src={image.src || "/placeholder.svg"}
-                    alt={image.alt}
+                    src={image.url}
+                    alt={"testing"}
                     fill
                     sizes="(max-width: 768px) 100vw, 200px"
                     className="object-cover"
@@ -122,7 +155,7 @@ export function ProductDetailsInfo() {
           <div className="flex-1 order-1 md:order-2">
             <div className="rounded-md overflow-hidden flex items-center justify-center">
               <Image
-                src={productImages[selectedImage].src || "/placeholder.svg"}
+                src={product.images[selectedImage].url}
                 alt={productImages[selectedImage].alt}
                 width={500}
                 height={500}
@@ -150,29 +183,22 @@ export function ProductDetailsInfo() {
             <span className="ml-2 text-gray-500">(1)</span>
           </div>
 
-          <h1 className="text-2xl font-bold mb-2">
-            Bottle Grinder Set Ceramic Spice Mill 2 Pcs
-          </h1>
+          <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
 
           <div className="text-2xl font-bold mb-4">$100.00</div>
 
-          <p className="text-gray-600 mb-4">
-            About this item Full Body Airbag & Rollers The smart airbags of the
-            massage chair for legs and back hold and release the muscles the
-            same way as a skilled...
-          </p>
+          <p className="text-gray-600 mb-4">{product.description}</p>
 
-          <div className="flex items-center gap-2 mb-4">
+          {/* <div className="flex items-center gap-2 mb-4">
             <Eye className="w-5 h-5 text-gray-500" />
             <span>15 people are viewing this right now</span>
-          </div>
+          </div> */}
 
           <div className="mb-4">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-sm">Availability:</span>
               <span className="flex items-center">
-                <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                300 in stock
+                {checkStockStatus(product.inStock)}
               </span>
             </div>
           </div>
@@ -180,26 +206,30 @@ export function ProductDetailsInfo() {
           <div className="mb-6">
             <div className="font-semibold mb-2 text-sm">Color</div>
             <div className="flex gap-2">
-              {colorOptions.map((color) => (
-                <button
-                  key={color.id}
-                  className={cn(
-                    "size-6 rounded-full transition-all flex items-center justify-center",
-                    selectedColor === color.id
-                      ? "outline-2 outline-offset-2"
-                      : ""
-                  )}
-                  style={{
-                    backgroundColor: color.hex,
-                    outlineColor: color.hex,
-                  }}
-                  onClick={() => handleColorSelect(color.id)}
-                >
-                  {selectedColor === color.id && (
-                    <Check size={17} color="#fff" className="font-bold" />
-                  )}
-                </button>
-              ))}
+              {product.variants.map((variant) =>
+                variant.options
+                  .filter((opt) => opt.type === "color")
+                  .map((opt) => (
+                    <button
+                      key={opt._id}
+                      className={cn(
+                        "size-6 rounded-full transition-all flex items-center justify-center",
+                        selectedColor === opt._id
+                          ? "outline-2 outline-offset-2"
+                          : ""
+                      )}
+                      style={{
+                        backgroundColor: opt.hexCode,
+                        outlineColor: opt.hexCode,
+                      }}
+                      onClick={() => handleColorSelect(opt._id)}
+                    >
+                      {selectedColor === opt._id && (
+                        <Check size={17} color="#fff" className="font-bold" />
+                      )}
+                    </button>
+                  ))
+              )}
             </div>
           </div>
 
