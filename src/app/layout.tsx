@@ -19,6 +19,8 @@ const geistMono = Geist_Mono({
 const jost = Jost({
   variable: "--font-jost",
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -34,13 +36,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${jost.variable} ${geistMono.variable} antialiased`}
+        className={`${jost.className}   antialiased`}
         suppressHydrationWarning
       >
         <ReactQueryProvider>
           <Header />
           <Navigation />
-          <div className=" min-h-screen ">{children}</div>
+          <div className="min-h-screen ">{children}</div>
           <Footer />
         </ReactQueryProvider>
       </body>

@@ -2,6 +2,7 @@ import type { Product } from "@/types/product";
 import { Heart, ShoppingBag, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { StarRating } from "../ui/StarRating";
 
 type ProductProps = {
   product: Product;
@@ -61,12 +62,8 @@ const Product = ({ product }: ProductProps) => {
         <p className="font-medium mt-2 min-[500px]:text-base text-sm text-neutral-700">
           {product.name}
         </p>
-        <div className="mt-2.5 flex items-center">
-          <Star size={10} fill="gold" color="gold" />
-          <Star size={10} fill="gold" color="gold" />
-          <Star size={10} fill="gold" color="gold" />
-          <Star size={10} fill="gold" color="gold" />
-          <Star size={10} fill="gold" color="gold" />
+        <div className="mt-2.5">
+          <StarRating rating={product.rating} size={15} />
         </div>
         <p className="mt-2 font-semibold text-sm">$19.00</p>
       </div>

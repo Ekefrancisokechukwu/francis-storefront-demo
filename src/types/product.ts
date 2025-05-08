@@ -59,4 +59,5 @@ export interface Product {
   rating: number;
   featured: boolean;
   variants: Variant[];
+  reviews: [];
 }
