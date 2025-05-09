@@ -1,5 +1,5 @@
 import type { Product } from "@/types/product";
-import { Heart, ShoppingBag, Star } from "lucide-react";
+import { Heart, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { StarRating } from "../ui/StarRating";
@@ -63,7 +63,7 @@ const Product = ({ product }: ProductProps) => {
           {product.name}
         </p>
         <div className="mt-2.5">
-          <StarRating rating={product.rating} size={15} />
+          <StarRating rating={product.rating} size={20} />
         </div>
         <p className="mt-2 font-semibold text-sm">$19.00</p>
       </div>

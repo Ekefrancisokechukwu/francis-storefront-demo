@@ -171,14 +171,13 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
         {/* Product Info Section */}
         <div>
           <div className="flex items-center mb-2">
-            <StarRating size={10} rating={product.rating} />
+            <StarRating size={20} rating={product.rating} />
             <span className="ml-2 text-gray-500">
               ({product.reviews.length ?? 0})
             </span>
           </div>
 
           <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
-
           <div className="text-2xl font-bold mb-4">$100.00</div>
 
           <p className="text-gray-600 mb-4">{product.description}</p>

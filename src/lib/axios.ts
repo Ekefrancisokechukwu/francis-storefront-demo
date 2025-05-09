@@ -1,27 +1,28 @@
+import { ACCESS_TOKEN_COOKIE_NAME } from "@/app/constants";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 
 const axiosClient = axios.create({
   baseURL:
     process.env.NEXT_PUBLIC_API_URL ||
     "https://francis-store-api.onrender.com/api/v1",
-  timeout: 10000,
+  // timeout: 10000,
 });
 
-// axiosClient.interceptors.request.use(
-//   (config) => {
-//     const token =
-//       typeof window !== "undefined" ? localStorage.getItem("token") : null;
+axiosClient.interceptors.request.use(
+  (config) => {
+    const token = getCookie(ACCESS_TOKEN_COOKIE_NAME);
 
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 // axiosClient.interceptors.response.use(
 //   (response) => response,

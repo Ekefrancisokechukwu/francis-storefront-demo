@@ -2,14 +2,14 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { productService } from "@/services/productService";
-import type { Product } from "@/types/product";
+// import type { Product } from "@/types/product";
 
 // Query keys for products
 export const productKeys = {
   all: ["products"] as const,
   featured: ["featured"],
   lists: () => [...productKeys.all, "list"] as const,
-  list: (filters: Record<string, any>) =>
+  list: (filters: Record<string, unknown>) =>
     [...productKeys.lists(), { filters }] as const,
   categories: () => [...productKeys.all, "categories"] as const,
   category: (category: string) =>
