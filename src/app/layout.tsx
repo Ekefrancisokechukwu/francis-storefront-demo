@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Jost } from "next/font/google";
+import { Jost } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layouts/header";
 import Navigation from "@/components/layouts/Navigation";
@@ -11,10 +11,10 @@ import ReactQueryProvider from "@/provider/react-query";
 //   subsets: ["latin"],
 // });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 const jost = Jost({
   variable: "--font-jost",

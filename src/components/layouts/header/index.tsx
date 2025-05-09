@@ -1,9 +1,8 @@
 import { Logo } from "@/components/ui/Logo";
-import Link from "next/link";
-import { UserRound } from "lucide-react";
 import CartLink from "./CartLink";
 import WishlistLink from "./WishlistLink";
 import SearchBar from "./SearchBar";
+import { UserLink } from "./UserLink";
 
 const Header = () => {
   return (
@@ -14,9 +13,7 @@ const Header = () => {
           <SearchBar />
         </div>
         <div className="flex items-center gap-x-5">
-          <Link href={"/account/login"}>
-            <UserRound />
-          </Link>
+          <UserLink />
           <WishlistLink />
           <CartLink />
         </div>

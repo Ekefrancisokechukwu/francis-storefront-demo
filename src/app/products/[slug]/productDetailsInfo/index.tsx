@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Check, ChevronDown, ChevronUp, Eye, Heart, Scale } from "lucide-react";
+import { Check, ChevronDown, ChevronUp,  Heart, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Product } from "@/types/product";
@@ -41,10 +41,7 @@ const productImages = [
   },
 ];
 
-const colorOptions = [
-  { id: 1, name: "Teal", value: "teal", hex: "#1D9A8B" },
-  { id: 2, name: "Gray", value: "gray", hex: "#808080", selected: true },
-];
+
 
 type ProductDetailsProps = {
   product: Product;

@@ -1,7 +1,7 @@
 import { ACCESS_TOKEN_COOKIE_NAME } from "@/app/constants";
 import axiosClient from "@/lib/axios";
 import type { User } from "@/types/user";
-import { deleteCookie, setCookie } from "cookies-next";
+import { deleteCookie, getCookie, setCookie } from "cookies-next";
 
 export interface LoginCredentials {
   email: string;
@@ -75,8 +75,8 @@ export const authService = {
 
   // Get token from localStorage
   getToken: (): string | null => {
-    if (typeof window === "undefined") return null;
-    return localStorage.getItem("token");
+    const token = getCookie(ACCESS_TOKEN_COOKIE_NAME) as string;
+    return token;
   },
 
   // Get refresh token from localStorage

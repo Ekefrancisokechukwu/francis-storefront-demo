@@ -19,7 +19,14 @@ export const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputValues.email.trim() || !inputValues.password.trim()) {
+
+    console.log(inputValues);
+
+    if (
+      !inputValues.email.trim() ||
+      !inputValues.password.trim() ||
+      !inputValues.username.trim()
+    ) {
       console.log("enter a value boss");
       return;
     }
@@ -34,7 +41,6 @@ export const RegisterForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const name = e.target.name;
-
     setInputValues((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -53,16 +59,21 @@ export const RegisterForm = () => {
 
       <div className="mt-8 space-y-4">
         <Input label="Username" name="username" onChange={handleChange} />
-        <Input label="Email" name="email" onChange={handleChange} />
+        <Input
+          label="Email"
+          type="email"
+          name="email"
+          onChange={handleChange}
+        />
 
         <Input
           label="Password"
           type="password"
-          name="email"
+          name="password"
           onChange={handleChange}
         />
       </div>
-      <Button className="mt-5 mb-6 w-full h-11">
+      <Button disabled={isPending} className="mt-5 mb-6 w-full h-11">
         CREATE {isPending && <Loader2 size={20} className="animate-spin" />}{" "}
       </Button>
       <div className="text-center">

@@ -5,7 +5,7 @@ const ENDPOINT = {
 };
 
 export const wishlistServices = {
-  getMyWishlists: async () => {
+  getAll: async () => {
     const response = await axiosClient(ENDPOINT.WISHLISTS);
     return response.data;
   },
