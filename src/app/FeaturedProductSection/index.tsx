@@ -4,12 +4,20 @@ import Product from "@/components/Product";
 import { ProductSkeleton } from "@/components/Product/Skeleton";
 import { Wrapper } from "@/components/ui/Wrapper";
 import { useGetFeaturedProducts } from "@/hooks/useProducts";
+import { useGetWishlists, useToggleWishlist } from "@/hooks/useWishlists";
 
 const FeaturedProductSection = () => {
   const { data, error, isLoading } = useGetFeaturedProducts();
+  const { data: wishlists } = useGetWishlists();
+  // const { mutate: toggleWishlist, isLoading: isWishlistLoading } =
+  //   useToggleWishlist();
+
+  const wishlistsId =
+    wishlists?.wishlists.products.map((prod) => prod._id) ?? [];
+
+  const wishlistSet = new Set(wishlistsId);
 
   const products = data?.products ?? [];
-  console.log(products, error);
 
   if (isLoading) {
     return (
@@ -40,7 +48,14 @@ const FeaturedProductSection = () => {
       <h1 className="font-semibold text-xl">Featured products</h1>
       <div className="mt-5 grid sm:grid-cols-[repeat(auto-fit,_minmax(13rem,_1fr))] grid-cols-2 ">
         {products.map((product, i) => {
-          return <Product key={i} product={product} />;
+          return (
+            <Product
+              key={i}
+              product={product}
+              isWishlisted={wishlistSet.has(product._id)}
+              // toggleWishlist={() => toggleWishlist(product._id)}
+            />
+          );
         })}
       </div>
     </Wrapper>

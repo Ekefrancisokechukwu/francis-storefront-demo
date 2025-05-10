@@ -75,8 +75,12 @@ export const authService = {
 
   // Get token from localStorage
   getToken: (): string | null => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+
     const token = getCookie(ACCESS_TOKEN_COOKIE_NAME) as string;
-    return token;
+    return token || null;
   },
 
   // Get refresh token from localStorage

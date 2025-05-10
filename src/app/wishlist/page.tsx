@@ -25,12 +25,7 @@ const Wishlist = () => {
           </Breadcrumb>
         </Wrapper>
       </div>
-
-      <Wrapper className="pt-[4rem]  grid lg:grid-cols-7 md:grid-cols-6  sm:grid-cols-4 min-[400px]:grid-cols-3  grid-cols-2 gap-5">
-        {Array.from({ length: 9 }).map((_, i) => {
-          return <WishlistProduct key={i} />;
-        })}
-      </Wrapper>
+      <WishlistProduct />;
     </div>
   );
 };

@@ -4,11 +4,25 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useCurrentUser } from "@/hooks/useAuth";
 import { UserRound } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export const UserLink = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const { data: user, isLoading } = useCurrentUser();
 
-  if (isLoading) {
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <div>
+        <Skeleton className="w-[3rem] h-[1.5rem] rounded bg-neutral-100/20" />
+      </div>
+    );
+  }
+
+  if (isLoading && !user) {
     return (
       <div>
         <Skeleton className="w-[3rem] h-[1.5rem] rounded bg-neutral-100/20" />
