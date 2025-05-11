@@ -1,16 +1,32 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Wrapper } from "@/components/ui/Wrapper";
 import { useGetWishlists, useRemoveFromWishLists } from "@/hooks/useWishlists";
 import { X } from "lucide-react";
 import Image from "next/image";
 
 export const WishlistProduct = () => {
-  const { data } = useGetWishlists();
+  const { data, isLoading } = useGetWishlists();
   const { mutate: removeItem } = useRemoveFromWishLists();
 
   const wishlists = data?.wishlists.products ?? [];
+
+  if (isLoading) {
+    return (
+      <Wrapper className="pt-[4rem]  grid lg:grid-cols-7 md:grid-cols-6  sm:grid-cols-4 min-[400px]:grid-cols-3  grid-cols-2 gap-5">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i}>
+            <Skeleton className="w-full h-[11rem] border rounded-md" />
+            <Skeleton className="mt-4 h-3 " />
+            <Skeleton className="mt-1 h-3 w-1/2 " />
+            <Skeleton className="mt-8 h-11 w-full " />
+          </div>
+        ))}
+      </Wrapper>
+    );
+  }
 
   return (
     <Wrapper className="pt-[4rem]  grid lg:grid-cols-7 md:grid-cols-6  sm:grid-cols-4 min-[400px]:grid-cols-3  grid-cols-2 gap-5">

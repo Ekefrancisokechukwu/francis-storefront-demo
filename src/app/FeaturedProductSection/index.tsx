@@ -4,18 +4,9 @@ import Product from "@/components/Product";
 import { ProductSkeleton } from "@/components/Product/Skeleton";
 import { Wrapper } from "@/components/ui/Wrapper";
 import { useGetFeaturedProducts } from "@/hooks/useProducts";
-import { useGetWishlists, useToggleWishlist } from "@/hooks/useWishlists";
 
 const FeaturedProductSection = () => {
   const { data, error, isLoading } = useGetFeaturedProducts();
-  const { data: wishlists } = useGetWishlists();
-  // const { mutate: toggleWishlist, isLoading: isWishlistLoading } =
-  //   useToggleWishlist();
-
-  const wishlistsId =
-    wishlists?.wishlists.products.map((prod) => prod._id) ?? [];
-
-  const wishlistSet = new Set(wishlistsId);
 
   const products = data?.products ?? [];
 

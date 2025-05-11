@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Check, ChevronDown, ChevronUp,  Heart, Scale } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, Heart, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Product } from "@/types/product";
@@ -40,8 +40,6 @@ const productImages = [
     alt: "Green bottle grinders",
   },
 ];
-
-
 
 type ProductDetailsProps = {
   product: Product;
@@ -98,8 +96,6 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
         return "Unknown";
     }
   };
-
-  console.log(product);
 
   return (
     <main className=" py-13">
