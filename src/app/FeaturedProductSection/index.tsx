@@ -48,14 +48,7 @@ const FeaturedProductSection = () => {
       <h1 className="font-semibold text-xl">Featured products</h1>
       <div className="mt-5 grid sm:grid-cols-[repeat(auto-fit,_minmax(13rem,_1fr))] grid-cols-2 ">
         {products.map((product, i) => {
-          return (
-            <Product
-              key={i}
-              product={product}
-              isWishlisted={wishlistSet.has(product._id)}
-              // toggleWishlist={() => toggleWishlist(product._id)}
-            />
-          );
+          return <Product key={i} product={product} />;
         })}
       </div>
     </Wrapper>

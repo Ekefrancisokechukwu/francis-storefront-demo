@@ -4,28 +4,43 @@ import Image from "next/image";
 import Link from "next/link";
 import { StarRating } from "../ui/StarRating";
 import { cn } from "@/lib/utils";
-import { useToggleWishlist } from "@/hooks/useWishlists";
+import { useIsInWishlist, useToggleWishlist } from "@/hooks/useWishlists";
 
 type ProductProps = {
   product: Product;
-  isWishlisted: boolean;
-  // toggleWishlist: () => void;
 };
 
-const Product = ({ product, isWishlisted }: ProductProps) => {
-  const { mutate: toggleWishlist, isPending } = useToggleWishlist();
+const Product = ({ product }: ProductProps) => {
+  const isInWishlist = useIsInWishlist(product._id);
+  const { mutate: toggleWishlist } = useToggleWishlist();
+
+  const handleToggle = (product: Product) => {
+    console.log("Before toggle - isInWishlist:", isInWishlist);
+
+    toggleWishlist(
+      { product, currentExists: isInWishlist },
+      {
+        onSuccess: (data) => {
+          console.log("Toggle success:", data);
+        },
+        onError: (error) => {
+          console.error("Toggle error:", error);
+        },
+      }
+    );
+  };
 
   return (
     <div className="border border-transparent hover:border-border ease-out  transition-all duration-500 rounded block max-w-[20rem] relative bg-white group/product">
       <div className=" right-4 -top-5 scale-90 opacity-0 group-hover/product:opacity-100 group-hover/product:top-6 group-hover/product:scale-100 transition-all duration-300 ease-smush z-20 flex  flex-col gap-y-1.5 absolute  ">
         <button
-          onClick={() => toggleWishlist(product._id)}
+          onClick={() => handleToggle(product)}
           className="border group  hover:bg-neutral-900 hover:text-white transition-all duration-300  grid w-max p-2 rounded-full"
         >
           <Heart
             size={18}
             className={cn(
-              isWishlisted ? "fill-black group-hover:fill-white" : "fill-none"
+              isInWishlist ? "fill-black group-hover:fill-white" : "fill-none"
             )}
           />
         </button>
@@ -33,9 +48,7 @@ const Product = ({ product, isWishlisted }: ProductProps) => {
           <ShoppingBag size={18} />
         </button>
       </div>
-      {isPending && (
-        <div className="absolute left-0 top-0 bg-white/40 z-40 w-full h-full" />
-      )}
+
       <Link href={`/products/${product.slug}`}>
         <div className=" relative overflow-hidden">
           <div className="overflow-hidden relative w-full aspect-square rounded">

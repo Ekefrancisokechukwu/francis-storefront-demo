@@ -16,7 +16,8 @@ export const wishlistServices = {
     return response.data;
   },
   addItem: async (id: string) => {
-    await axiosClient.post(ENDPOINT.WISHLIST(id));
+    const response = await axiosClient.post(ENDPOINT.WISHLIST(id));
+    return response.data;
   },
   removeItem: async (id: string) => {
     await axiosClient.delete(ENDPOINT.WISHLIST(id));

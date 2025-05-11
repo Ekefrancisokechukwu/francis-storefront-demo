@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export const WishlistProduct = () => {
   const { data } = useGetWishlists();
-  const { mutate } = useRemoveFromWishLists();
+  const { mutate: removeItem } = useRemoveFromWishLists();
 
   const wishlists = data?.wishlists.products ?? [];
 
@@ -29,7 +29,7 @@ export const WishlistProduct = () => {
                 className="object-cover"
               />
               <Button
-                onClick={() => mutate(item._id)}
+                onClick={() => removeItem(item._id)}
                 variant={"outline"}
                 className="absolute top-0 right-0 rounded-full"
               >
