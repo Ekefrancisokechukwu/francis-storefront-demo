@@ -3,10 +3,10 @@
 import Product from "@/components/Product";
 import { ProductSkeleton } from "@/components/Product/Skeleton";
 import { Wrapper } from "@/components/ui/Wrapper";
-import { useGetFeaturedProducts } from "@/hooks/useProducts";
+import { useFeaturedProducts } from "@/hooks/useProducts";
 
 const FeaturedProductSection = () => {
-  const { data, error, isLoading } = useGetFeaturedProducts();
+  const { data, error, isLoading } = useFeaturedProducts();
 
   const products = data?.products ?? [];
 

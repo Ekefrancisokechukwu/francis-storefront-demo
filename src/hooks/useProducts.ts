@@ -2,13 +2,15 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { productService } from "@/services/productService";
+import { ProductQueryParams } from "@/types/product";
 // import type { Product } from "@/types/product";
 
 // Query keys for products
 export const productKeys = {
   all: ["products"] as const,
   featured: ["featured"],
-  lists: () => [...productKeys.all, "list"] as const,
+  lists: (params?: ProductQueryParams) =>
+    [...productKeys.all, "list", params] as const,
   list: (filters: Record<string, unknown>) =>
     [...productKeys.lists(), { filters }] as const,
   categories: () => [...productKeys.all, "categories"] as const,
@@ -19,17 +21,17 @@ export const productKeys = {
 };
 
 // Hook for fetching all products
-export function useProducts() {
+export function useProducts(params: ProductQueryParams) {
   return useQuery({
-    queryKey: productKeys.lists(),
-    queryFn: () => productService.getAll(),
+    queryKey: productKeys.lists(params),
+    queryFn: () => productService.getAll(params),
   });
 }
 
 // hook fetching the landing page featured products
-export function useGetFeaturedProducts() {
+export function useFeaturedProducts() {
   return useQuery({
     queryKey: productKeys.featured,
-    queryFn: () => productService.getAll(),
+    queryFn: () => productService.getFeaturedProducts(),
   });
 }

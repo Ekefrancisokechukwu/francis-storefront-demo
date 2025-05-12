@@ -6,6 +6,7 @@ import { Wrapper } from "@/components/ui/Wrapper";
 import { useGetWishlists, useRemoveFromWishLists } from "@/hooks/useWishlists";
 import { X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const WishlistProduct = () => {
   const { data, isLoading } = useGetWishlists();
@@ -16,7 +17,7 @@ export const WishlistProduct = () => {
   if (isLoading) {
     return (
       <Wrapper className="pt-[4rem]  grid lg:grid-cols-7 md:grid-cols-6  sm:grid-cols-4 min-[400px]:grid-cols-3  grid-cols-2 gap-5">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 7 }).map((_, i) => (
           <div key={i}>
             <Skeleton className="w-full h-[11rem] border rounded-md" />
             <Skeleton className="mt-4 h-3 " />
@@ -25,6 +26,20 @@ export const WishlistProduct = () => {
           </div>
         ))}
       </Wrapper>
+    );
+  }
+
+  if (wishlists.length === 0) {
+    return (
+      <div className="text-center  mt-32">
+        <p className="text-2xl  ">No products were added to your wishlist.</p>
+        <Link
+          href={"/collections"}
+          className="hover:no-underline mt-1.5  text-lg font-medium underline underline-offset-2 transition-all duration-300"
+        >
+          Continue shopping
+        </Link>
+      </div>
     );
   }
 

@@ -62,3 +62,19 @@ export interface Product {
   variants: Variant[];
   reviews: [];
 }
+
+export interface ProductQueryParams {
+  page?: number;
+  limit?: number;
+  sort?: string;
+  category?: string;
+  brand?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  featured?: boolean;
+  search?: string;
+  color?: string;
+  tags?: string;
+  availability?: string;
+  rating?: number;
+}
