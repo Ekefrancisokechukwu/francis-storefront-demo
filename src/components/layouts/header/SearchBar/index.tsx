@@ -3,6 +3,7 @@
 import useClickOutside from "@/hooks/useClickOutside";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useProducts } from "@/hooks/useProducts";
+import { formatUSD } from "@/lib/utils";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +15,7 @@ const SearchBar = () => {
   const [search, setSearch] = useState("");
   const debouncedInput = useDebounce(search, 500);
 
-  const { data, isLoading, isError } = useProducts({
+  const { data, isLoading } = useProducts({
     search: debouncedInput,
     limit: 3,
   });
@@ -53,15 +54,16 @@ const SearchBar = () => {
               </p>
             </div>
           ) : data?.products.length === 0 ? (
-            <p className="font-medium text-neutral-800  py-1.5 border-b">
-              No results found for “eekj”. Check the spelling or use a different
-              word or phrase.
+            <p className="font-medium text-neutral-700 text-sm  py-1.5 border-b">
+              No results found for “{debouncedInput}”. Check the spelling or use
+              a different word or phrase.
             </p>
           ) : (
             <div className="">
               {data?.products.map((prod) => (
                 <Link
-                  href={""}
+                  onClick={() => setisOpen(false)}
+                  href={`/products/${prod.slug}`}
                   key={prod._id}
                   className="flex group w-full items-center py-2 gap-x-2"
                 >
@@ -79,7 +81,9 @@ const SearchBar = () => {
                     <p className="text-sm  group-hover:text-neutral-600 transition-colors text-neutral-800">
                       {prod.name}
                     </p>
-                    <p className="font-bold text-neutral-800 text-sm ">$400</p>
+                    <p className="font-bold text-neutral-800 text-sm ">
+                      {formatUSD(prod.price)}
+                    </p>
                   </div>
                 </Link>
               ))}

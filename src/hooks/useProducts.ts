@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { productService } from "@/services/productService";
 import { ProductQueryParams } from "@/types/product";
 // import type { Product } from "@/types/product";
@@ -25,6 +25,7 @@ export function useProducts(params: ProductQueryParams) {
   return useQuery({
     queryKey: productKeys.lists(params),
     queryFn: () => productService.getAll(params),
+    placeholderData: keepPreviousData,
   });
 }
 

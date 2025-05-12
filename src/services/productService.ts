@@ -3,6 +3,10 @@ import { Product, ProductQueryParams } from "@/types/product";
 
 interface ProductApiResponse {
   products: Product[];
+  count: number;
+  total: number;
+  totalPages: number;
+  currentPage: number;
 }
 
 const ENDPOINTS = {

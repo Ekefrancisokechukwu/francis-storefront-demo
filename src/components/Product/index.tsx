@@ -3,7 +3,7 @@ import { Heart, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { StarRating } from "../ui/StarRating";
-import { cn } from "@/lib/utils";
+import { cn, formatUSD } from "@/lib/utils";
 import { useIsInWishlist, useToggleWishlist } from "@/hooks/useWishlists";
 
 type ProductProps = {
@@ -92,7 +92,10 @@ const Product = ({ product }: ProductProps) => {
           <div className="mt-2.5">
             <StarRating rating={product.rating} size={20} />
           </div>
-          <p className="mt-2 font-semibold text-sm">$19.00</p>
+          <p className="mt-2 font-semibold text-sm">
+            {" "}
+            {formatUSD(product.price)}
+          </p>
         </div>
       </Link>
     </div>

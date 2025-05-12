@@ -1,31 +1,44 @@
 "use client";
 
 import Product from "@/components/Product";
-import { Button } from "@/components/ui/button";
+import { ProductSkeleton } from "@/components/Product/Skeleton";
+import { PaginationBtns } from "@/components/ui/PaginationBtns";
 import { useProducts } from "@/hooks/useProducts";
-import { ChevronRight } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 export const ProductsContianer = () => {
-  const { data, isLoading, error } = useProducts();
-  const products = data?.products ? data.products : [];
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const queryParams = {
+    limit: 2,
+    page: currentPage,
+  };
+
+  const { data, isLoading, error } = useProducts(queryParams);
+  const products = data?.products ?? [];
+
+  console.log(data);
+
+  if (isLoading) {
+    return (
+      <div className="grid md:grid-cols-4 gap-2.5 sm:grid-cols-3 grid-cols-2">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <ProductSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div>
-      {/* <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2">
+      <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2">
         {products.map((product, i) => {
           return <Product key={i} product={product} />;
         })}
-      </div> */}
+      </div>
 
       <div className="mt-10 flex justify-center">
-        <div className="flex items-center gap-x-1">
-          <Button>1</Button>
-          <Button variant={"outline"}>2</Button>
-          <Button variant={"outline"}>3</Button>
-          <Button variant={"outline"}>
-            <ChevronRight />
-          </Button>
-        </div>
+        <PaginationBtns totalPages={data?.totalPages ?? 0} />
       </div>
     </div>
   );

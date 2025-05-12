@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Check, ChevronDown, ChevronUp, Heart, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, formatUSD } from "@/lib/utils";
 import { Product } from "@/types/product";
 import { StarRating } from "@/components/ui/StarRating";
 
@@ -171,7 +171,9 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
           </div>
 
           <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
-          <div className="text-2xl font-bold mb-4">$100.00</div>
+          <div className="text-2xl font-bold mb-4">
+            {formatUSD(product.price)}
+          </div>
 
           <p className="text-gray-600 mb-4">{product.description}</p>
 
