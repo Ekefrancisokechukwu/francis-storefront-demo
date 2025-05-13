@@ -19,6 +19,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cookies-next": "^5.1.0",
+    "dayjs": "^1.11.13",
     "lucide-react": "^0.507.0",
     "motion": "^12.9.7",
     "next": "15.3.1",

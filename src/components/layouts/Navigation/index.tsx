@@ -11,7 +11,7 @@ const categories = ["Our store", "Desk", "Dinning rooms", "Beds"];
 
 const Navigation = () => {
   return (
-    <nav className="px-5 py-3 sticky top-0 z-50  bg-white  shadow ">
+    <nav className="px-5 py-3 sticky top-0 z-50  bg-white  shadow-lg ">
       <button className="md:hidden flex items-center gap-x-2  ">
         <Logs size={20} /> Menu
       </button>

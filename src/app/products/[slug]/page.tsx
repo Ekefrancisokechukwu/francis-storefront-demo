@@ -8,6 +8,7 @@ import { Wrapper } from "@/components/ui/Wrapper";
 import { ProductDetailsInfo } from "./productDetailsInfo";
 import Link from "next/link";
 import { productService } from "@/services/productService";
+import { Review } from "./Review";
 
 const ProductDetailsPage = async ({
   params,
@@ -41,6 +42,7 @@ const ProductDetailsPage = async ({
 
       <Wrapper>
         <ProductDetailsInfo product={product} />
+        <Review productId={product._id} />
       </Wrapper>
     </div>
   );

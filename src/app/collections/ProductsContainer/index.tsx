@@ -17,8 +17,6 @@ export const ProductsContianer = () => {
   const { data, isLoading, error } = useProducts(queryParams);
   const products = data?.products ?? [];
 
-  console.log(data);
-
   if (isLoading) {
     return (
       <div className="grid md:grid-cols-4 gap-2.5 sm:grid-cols-3 grid-cols-2">
