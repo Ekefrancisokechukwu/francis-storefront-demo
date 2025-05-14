@@ -42,7 +42,7 @@ const ProductDetailsPage = async ({
 
       <Wrapper>
         <ProductDetailsInfo product={product} />
-        <Review productId={product._id} />
+        <Review product={product} />
       </Wrapper>
     </div>
   );

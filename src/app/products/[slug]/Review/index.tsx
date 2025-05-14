@@ -2,16 +2,17 @@
 
 import { StarRating } from "@/components/ui/StarRating";
 import { useGetReviews } from "@/hooks/useReviews";
-import { Loader2, Star } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import dayjs from "dayjs";
 import { ReviewInfo } from "./ReviewInfos";
+import { Product } from "@/types/product";
 
 interface ReviewProps {
-  productId: string;
+  product: Product;
 }
 
-export const Review = ({ productId }: ReviewProps) => {
-  const { data: reviews, isLoading, error } = useGetReviews(productId);
+export const Review = ({ product }: ReviewProps) => {
+  const { data: reviews, isLoading } = useGetReviews(product._id);
 
   return (
     <div className="mt-9">
@@ -23,7 +24,7 @@ export const Review = ({ productId }: ReviewProps) => {
       <section className="mt-10  md:gap-x-10 gap-x-5 flex sm:flex-row flex-col gap-y-5 items-start">
         <div className="max-w-[30rem]">
           <p>Be the first to write a review</p>
-          <ReviewInfo />
+          <ReviewInfo product={product} />
         </div>
 
         <div className="flex-1 sm:w-auto  w-full  space-y-2">
