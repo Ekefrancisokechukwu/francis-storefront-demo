@@ -1,7 +1,12 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion } from "./Accordion";
+import { StockStats } from "@/types/product";
 
-export const Availability = () => {
+interface AvailabilityProps {
+  availability: StockStats;
+}
+
+export const Availability = ({ availability }: AvailabilityProps) => {
   return (
     <Accordion
       title="Availability"
@@ -10,7 +15,7 @@ export const Availability = () => {
           <div className="flex items-center gap-x-2.5 ">
             <Checkbox id="in-stock" />
             <label htmlFor="in-stock" className="text-sm cursor-pointer flex-1">
-              In stock (21)
+              In stock ({availability?.inStock ?? 0})
             </label>
           </div>
           <div className="flex items-center gap-x-2.5 ">
@@ -19,7 +24,7 @@ export const Availability = () => {
               htmlFor="out-stock"
               className="text-sm cursor-pointer flex-1"
             >
-              Out stock (6)
+              Out stock ({availability?.outOfStock ?? 0})
             </label>
           </div>
         </div>

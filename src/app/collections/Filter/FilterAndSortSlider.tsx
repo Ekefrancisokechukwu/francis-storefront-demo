@@ -4,14 +4,17 @@ import { SlidersHorizontal, X } from "lucide-react";
 import { Availability } from "./Availability";
 import { Price } from "./Price";
 import { ProductType } from "./ProductType";
-import { Color } from "./Color";
-import { Brand } from "./Brand";
+import { Colors } from "./Color";
+import { Brands } from "./Brand";
 import { SortNav } from "../SortNav";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useGetAllFilters } from "@/hooks/useProducts";
+import { StockStats } from "@/types/product";
 
 export const FilterAndSortSlider = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: filters } = useGetAllFilters();
 
   return (
     <div>
@@ -46,11 +49,11 @@ export const FilterAndSortSlider = () => {
           </button>
         </div>
         <div className="mt-5 space-y-6 px-5 overflow-y-auto">
-          <Availability />
-          <Price />
-          <ProductType />
-          <Color />
-          <Brand />
+          <Availability availability={filters?.stockStats as StockStats} />
+          <Price maxPrice={filters?.productHighestPrice ?? 0} />
+          <ProductType tags={filters?.tags ?? []} />
+          <Colors colors={filters?.colors ?? []} />
+          <Brands brands={filters?.brands ?? []} />
           <SortNav />
         </div>
       </aside>

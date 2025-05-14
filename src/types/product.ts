@@ -78,3 +78,31 @@ export interface ProductQueryParams {
   availability?: string;
   rating?: number;
 }
+
+export type StockStats = {
+  inStock: number;
+  outOfStock: number;
+};
+
+export type Tag = {
+  count: number;
+  tag: string;
+};
+
+export type Color = {
+  hexCode: string;
+  displayName: string;
+};
+
+export type Brand = {
+  count: number;
+  brand: string;
+};
+
+export type ProductFilters = {
+  stockStats: StockStats;
+  productHighestPrice: number;
+  tags: Tag[];
+  colors: Color[];
+  brands: Brand[];
+};

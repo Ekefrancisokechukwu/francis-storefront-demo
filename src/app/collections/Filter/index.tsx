@@ -1,12 +1,25 @@
+"use client";
+
 import Link from "next/link";
 import { Availability } from "./Availability";
 import { Price } from "./Price";
-import { Color } from "./Color";
-import { Brand } from "./Brand";
+import { Colors } from "./Color";
+import { Brands } from "./Brand";
 import { ProductType } from "./ProductType";
 import { X } from "lucide-react";
+import { useGetAllFilters } from "@/hooks/useProducts";
+import { FilterLoading } from "./Loading";
+import { StockStats } from "@/types/product";
 
 export const Filter = () => {
+  const { data: filters, isLoading } = useGetAllFilters();
+
+  // console.log(data);
+
+  if (isLoading) {
+    return <FilterLoading />;
+  }
+
   return (
     <div className="border-r pr-5 lg:block hidden">
       <div className="flex items-center justify-between">
@@ -27,11 +40,11 @@ export const Filter = () => {
         </button>
       </div>
       <div className="mt-8 space-y-6">
-        <Availability />
-        <Price />
-        <ProductType />
-        <Color />
-        <Brand />
+        <Availability availability={filters?.stockStats as StockStats} />
+        <Price maxPrice={filters?.productHighestPrice ?? 0} />
+        <ProductType tags={filters?.tags ?? []} />
+        <Colors colors={filters?.colors ?? []} />
+        <Brands brands={filters?.brands ?? []} />
       </div>
     </div>
   );

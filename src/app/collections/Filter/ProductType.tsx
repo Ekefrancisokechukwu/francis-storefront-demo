@@ -1,18 +1,28 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion } from "./Accordion";
+import { Tag } from "@/types/product";
 
-export const ProductType = () => {
+interface ProductType {
+  tags: Tag[];
+}
+
+export const ProductType = ({ tags = [] }: ProductType) => {
   return (
     <Accordion
-      title="Product Type"
+      title="Product Tags"
       content={
         <div className="space-y-2">
-          <div className="flex items-center gap-x-2.5 ">
-            <Checkbox id="HomeTown" />
-            <label htmlFor="HomeTown" className="text-sm cursor-pointer flex-1">
-              HomeTown (6)
-            </label>
-          </div>
+          {tags.map((tag) => (
+            <div key={tag.tag} className="flex items-center gap-x-2.5 ">
+              <Checkbox id={tag.tag} />
+              <label
+                htmlFor={tag.tag}
+                className="text-sm cursor-pointer capitalize flex-1"
+              >
+                {tag?.tag} ({tag?.count ?? 0})
+              </label>
+            </div>
+          ))}
         </div>
       }
     />

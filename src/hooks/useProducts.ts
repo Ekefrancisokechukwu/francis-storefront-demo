@@ -18,6 +18,7 @@ export const productKeys = {
     [...productKeys.categories(), category] as const,
   details: () => [...productKeys.all, "detail"] as const,
   detail: (id: string) => [...productKeys.details(), id] as const,
+  filters: ["all_filters"] as const,
 };
 
 // Hook for fetching all products
@@ -34,5 +35,13 @@ export function useFeaturedProducts() {
   return useQuery({
     queryKey: productKeys.featured,
     queryFn: () => productService.getFeaturedProducts(),
+  });
+}
+
+// get all products filters
+export function useGetAllFilters() {
+  return useQuery({
+    queryKey: productKeys.filters,
+    queryFn: () => productService.getAllFilters(),
   });
 }

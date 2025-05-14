@@ -1,5 +1,5 @@
 import axiosClient from "@/lib/axios";
-import { Product, ProductQueryParams } from "@/types/product";
+import { Product, ProductFilters, ProductQueryParams } from "@/types/product";
 
 interface ProductApiResponse {
   products: Product[];
@@ -14,6 +14,7 @@ const ENDPOINTS = {
   PRODUCTS_FEATURED: "/products/?featured=true",
   PRODUCT: (idOrSlug: string) => `/products/${idOrSlug}`,
   PRODUCT_CATEGORY: (category: string) => `/products/category/${category}`,
+  PRODUCT_FILTERS: "/products/filters",
 };
 
 const buildQueryString = (params: ProductQueryParams) => {
@@ -44,6 +45,12 @@ export const productService = {
   // Get product by
   getProduct: async (idOrSlug: string): Promise<Product> => {
     const response = await axiosClient.get(ENDPOINTS.PRODUCT(idOrSlug));
+    return response.data;
+  },
+
+  // Get all filters
+  getAllFilters: async (): Promise<ProductFilters> => {
+    const response = await axiosClient.get(ENDPOINTS.PRODUCT_FILTERS);
     return response.data;
   },
 };
