@@ -20,7 +20,7 @@ export const ReviewModal = ({ open, close }: ReviewModalProps) => {
       />
       <div
         className={cn(
-          "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  max-w-[40rem] w-full p-7 bg-white  fixed z-[80] h-[37rem] rounded-lg transition-all duration-300 ease-smush",
+          "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  max-w-[40rem] w-full p-7 bg-white  fixed z-[80]  lg:max-h-[37rem] h-full rounded-lg transition-all duration-300 ease-smush",
           open ? "scale-100" : "scale-0"
         )}
       >
