@@ -38,7 +38,7 @@ const FeaturedProductSection = () => {
     <Wrapper className="mt-10">
       <h1 className="font-semibold text-xl">Featured products</h1>
       <div className="mt-5 grid sm:grid-cols-[repeat(auto-fit,_minmax(13rem,_1fr))] grid-cols-2 ">
-        {products.map((product, i) => {
+        {products.slice(0, 12).map((product, i) => {
           return <Product key={i} product={product} />;
         })}
       </div>

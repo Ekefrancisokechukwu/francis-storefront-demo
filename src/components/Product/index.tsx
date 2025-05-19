@@ -1,10 +1,11 @@
 import type { Product } from "@/types/product";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart, Loader2, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { StarRating } from "../ui/StarRating";
 import { cn, formatUSD } from "@/lib/utils";
 import { useIsInWishlist, useToggleWishlist } from "@/hooks/useWishlists";
+import { useAddToCart } from "@/hooks/useCart";
 
 type ProductProps = {
   product: Product;
@@ -13,6 +14,7 @@ type ProductProps = {
 const Product = ({ product }: ProductProps) => {
   const isInWishlist = useIsInWishlist(product._id);
   const { mutate: toggleWishlist } = useToggleWishlist();
+  const { mutate, isPending } = useAddToCart();
 
   const handleToggle = (product: Product) => {
     console.log("Before toggle - isInWishlist:", isInWishlist);
@@ -44,8 +46,17 @@ const Product = ({ product }: ProductProps) => {
             )}
           />
         </button>
-        <button className="border hover:bg-neutral-900 hover:text-white transition-all duration-300   grid w-max p-2 rounded-full">
-          <ShoppingBag size={18} />
+        <button
+          onClick={() => mutate(product._id)}
+          className="border hover:bg-neutral-900 hover:text-white transition-all duration-300   grid w-max p-2 rounded-full"
+        >
+          {isPending ? (
+            <span className="flex justify-center items-center">
+              <Loader2 size={18} className="animate-spin origin-center" />
+            </span>
+          ) : (
+            <ShoppingBag size={18} />
+          )}
         </button>
       </div>
 

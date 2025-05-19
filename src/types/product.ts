@@ -68,12 +68,12 @@ export interface ProductQueryParams {
   limit?: number;
   sort?: string;
   category?: string;
-  brand?: string;
-  minPrice?: number;
-  maxPrice?: number;
+  brands?: string;
+  minPrice?: string;
+  maxPrice?: string;
   featured?: boolean;
   search?: string;
-  color?: string;
+  colors?: string;
   tags?: string;
   availability?: string;
   rating?: number;
@@ -92,6 +92,7 @@ export type Tag = {
 export type Color = {
   hexCode: string;
   displayName: string;
+  value: string;
 };
 
 export type Brand = {

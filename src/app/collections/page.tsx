@@ -43,7 +43,7 @@ const CollectionsPage = () => {
         </div>
 
         {/* Products */}
-        <div className="mt-5 grid lg:grid-cols-[18rem_1fr] gap-x-7">
+        <div className="mt-5 grid lg:grid-cols-[20rem_1fr] gap-x-7">
           <Filter />
           <ProductsContianer />
         </div>

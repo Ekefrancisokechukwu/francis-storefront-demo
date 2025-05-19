@@ -48,7 +48,7 @@ type ProductDetailsProps = {
 export function ProductDetailsInfo({ product }: ProductDetailsProps) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState(0);
   const [inWishlist, setInWishlist] = useState(false);
 
   const decreaseQuantity = () => {
@@ -61,8 +61,8 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
     setQuantity(quantity + 1);
   };
 
-  const handleColorSelect = (id: number) => {
-    setSelectedColor(id);
+  const handleColorSelect = (index: number) => {
+    setSelectedColor(index);
   };
 
   const toggleWishlist = () => {

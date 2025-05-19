@@ -6,15 +6,14 @@ import { Price } from "./Price";
 import { Colors } from "./Color";
 import { Brands } from "./Brand";
 import { ProductType } from "./ProductType";
-import { X } from "lucide-react";
 import { useGetAllFilters } from "@/hooks/useProducts";
 import { FilterLoading } from "./Loading";
 import { StockStats } from "@/types/product";
+// import { useUrlParams } from "@/hooks/useUrlParams";
 
 export const Filter = () => {
   const { data: filters, isLoading } = useGetAllFilters();
-
-  // console.log(data);
+  // const { getParam } = useUrlParams();
 
   if (isLoading) {
     return <FilterLoading />;
@@ -31,19 +30,13 @@ export const Filter = () => {
           REMOVE ALL
         </Link>
       </div>
-      <div className="mt-5 flex items-center gap-3">
-        <button className="cursor-pointer text-sm flex items-center gap-x-1">
-          <span className="p-0.5 rounded-full bg-rose-400 text-white">
-            <X size={13} />
-          </span>
-          Sofa
-        </button>
-      </div>
+
       <div className="mt-8 space-y-6">
         <Availability availability={filters?.stockStats as StockStats} />
         <Price maxPrice={filters?.productHighestPrice ?? 0} />
-        <ProductType tags={filters?.tags ?? []} />
         <Colors colors={filters?.colors ?? []} />
+
+        <ProductType tags={filters?.tags ?? []} />
         <Brands brands={filters?.brands ?? []} />
       </div>
     </div>

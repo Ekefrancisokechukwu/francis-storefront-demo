@@ -8,6 +8,7 @@ interface QuantitySelectorProps {
   max?: number;
   className?: string;
   disabled?: boolean;
+  isPending?: boolean;
 }
 
 export const QuantitySelector = ({
@@ -18,6 +19,7 @@ export const QuantitySelector = ({
   max,
   className,
   disabled = false,
+  isPending,
 }: QuantitySelectorProps) => {
   const handleDecrease = () => {
     if (!disabled && (min === undefined || quantity > min)) {
@@ -39,13 +41,13 @@ export const QuantitySelector = ({
       <button
         type="button"
         className={cn(
-          "px-3 py-2 border-r border-gray-300 transition-colors",
+          "px-3 py-2 border-r border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors",
           isDecreaseDisabled
             ? "opacity-50 cursor-not-allowed"
             : "hover:bg-gray-100"
         )}
         onClick={handleDecrease}
-        disabled={isDecreaseDisabled}
+        disabled={isDecreaseDisabled || isPending}
         aria-label="Decrease quantity"
       >
         −
@@ -60,13 +62,13 @@ export const QuantitySelector = ({
       <button
         type="button"
         className={cn(
-          "px-3 py-2 border-l border-gray-300 transition-colors",
+          "px-3 py-2 border-l disabled:opacity-50 disabled:cursor-not-allowed border-gray-300 transition-colors",
           isIncreaseDisabled
             ? "opacity-50 cursor-not-allowed"
             : "hover:bg-gray-100"
         )}
         onClick={handleIncrease}
-        disabled={isIncreaseDisabled}
+        disabled={isPending || isIncreaseDisabled}
         aria-label="Increase quantity"
       >
         +

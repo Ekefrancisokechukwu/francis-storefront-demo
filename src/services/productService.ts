@@ -37,7 +37,7 @@ export const productService = {
     return response.data;
   },
 
-  getFeaturedProducts: async () => {
+  getFeaturedProducts: async (): Promise<ProductApiResponse> => {
     const response = await axiosClient.get(ENDPOINTS.PRODUCTS_FEATURED);
     return response.data;
   },

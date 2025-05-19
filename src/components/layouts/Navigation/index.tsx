@@ -25,7 +25,7 @@ const Navigation = () => {
                 <ChevronDown size={20} className="ms-auto" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)] p-0 divide-y">
+            <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)] p-0 divide-y border-0 rounded-none">
               {categories.map((category, i) => {
                 return (
                   <DropdownMenuItem

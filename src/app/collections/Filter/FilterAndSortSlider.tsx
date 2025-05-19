@@ -48,11 +48,12 @@ export const FilterAndSortSlider = () => {
             <X />
           </button>
         </div>
-        <div className="mt-5 space-y-6 px-5 overflow-y-auto">
+        <div className="mt-5 space-y-6 px-5  h-[90%] pb-20 overflow-y-auto">
           <Availability availability={filters?.stockStats as StockStats} />
           <Price maxPrice={filters?.productHighestPrice ?? 0} />
-          <ProductType tags={filters?.tags ?? []} />
           <Colors colors={filters?.colors ?? []} />
+
+          <ProductType tags={filters?.tags ?? []} />
           <Brands brands={filters?.brands ?? []} />
           <SortNav />
         </div>

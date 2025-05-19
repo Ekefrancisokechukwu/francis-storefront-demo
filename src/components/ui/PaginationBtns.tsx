@@ -20,6 +20,8 @@ export const PaginationBtns = ({ totalPages }: PaginationBtnsProps) => {
     return `${pathname}?${params.toString()}`;
   };
 
+  
+
   return (
     <div className="flex items-center gap-x-1">
       {/* Prev page btn */}
