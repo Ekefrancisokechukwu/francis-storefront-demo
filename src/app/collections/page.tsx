@@ -10,6 +10,7 @@ import { SortNav } from "./SortNav";
 import { Filter } from "./Filter";
 import { ProductsContianer } from "./ProductsContainer";
 import { FilterAndSortSlider } from "./Filter/FilterAndSortSlider";
+import { Suspense } from "react";
 // import { TotalProductSummary } from "./TotalProductSummary";
 
 const CollectionsPage = () => {
@@ -46,7 +47,9 @@ const CollectionsPage = () => {
         {/* Products */}
         <div className="mt-5 grid lg:grid-cols-[20rem_1fr] gap-x-7">
           <Filter />
-          <ProductsContianer />
+          <Suspense>
+            <ProductsContianer />
+          </Suspense>
         </div>
       </Wrapper>
     </div>

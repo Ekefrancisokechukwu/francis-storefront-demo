@@ -9,6 +9,7 @@ import { ProductType } from "./ProductType";
 import { useGetAllFilters } from "@/hooks/useProducts";
 import { FilterLoading } from "./Loading";
 import { StockStats } from "@/types/product";
+import { Suspense } from "react";
 // import { useUrlParams } from "@/hooks/useUrlParams";
 
 export const Filter = () => {
@@ -32,12 +33,14 @@ export const Filter = () => {
       </div>
 
       <div className="mt-8 space-y-6">
-        <Availability availability={filters?.stockStats as StockStats} />
-        <Price maxPrice={filters?.productHighestPrice ?? 0} />
-        <Colors colors={filters?.colors ?? []} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Availability availability={filters?.stockStats as StockStats} />
+          <Price maxPrice={filters?.productHighestPrice ?? 0} />
+          <Colors colors={filters?.colors ?? []} />
 
-        <ProductType tags={filters?.tags ?? []} />
-        <Brands brands={filters?.brands ?? []} />
+          <ProductType tags={filters?.tags ?? []} />
+          <Brands brands={filters?.brands ?? []} />
+        </Suspense>
       </div>
     </div>
   );
