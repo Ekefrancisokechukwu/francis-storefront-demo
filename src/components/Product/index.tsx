@@ -47,7 +47,7 @@ const Product = ({ product }: ProductProps) => {
           />
         </button>
         <button
-          onClick={() => mutate(product._id)}
+          onClick={() => mutate({ productId: product._id })}
           className="border hover:bg-neutral-900 hover:text-white transition-all duration-300   grid w-max p-2 rounded-full"
         >
           {isPending ? (

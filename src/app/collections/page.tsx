@@ -10,6 +10,7 @@ import { SortNav } from "./SortNav";
 import { Filter } from "./Filter";
 import { ProductsContianer } from "./ProductsContainer";
 import { FilterAndSortSlider } from "./Filter/FilterAndSortSlider";
+// import { TotalProductSummary } from "./TotalProductSummary";
 
 const CollectionsPage = () => {
   return (
@@ -38,7 +39,7 @@ const CollectionsPage = () => {
             <div className="lg:block hidden">
               <SortNav />
             </div>
-            <span className="font-semibold text-sm">22 products</span>
+            {/* <TotalProductSummary /> */}
           </div>
         </div>
 

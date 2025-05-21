@@ -1,5 +1,7 @@
 import axiosClient from "@/lib/axios";
-import { ApiResponse } from "@/types/cart";
+import { AddToCartVariant, ApiResponse } from "@/types/cart";
+
+// export type { CartItem, SelectedOption };
 
 const ENDPOINTS = {
   CARTS: "/cart",
@@ -12,8 +14,17 @@ export const cartServices = {
     return response.data;
   },
 
-  addToCart: async (productId: string) => {
-    const response = await axiosClient.post(ENDPOINTS.CARTS_ITEM(productId));
+  addToCart: async (
+    productId: string,
+    payload: AddToCartVariant | undefined
+  ) => {
+    const response = await axiosClient.post(
+      ENDPOINTS.CARTS_ITEM(productId),
+      payload ?? {}
+    );
+
+    console.log("payload", payload);
+
     return response.data;
   },
 

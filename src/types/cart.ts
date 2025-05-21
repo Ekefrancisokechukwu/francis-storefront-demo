@@ -1,6 +1,8 @@
-export interface Variant {
-  combination: string;
-}
+// export interface Variant {
+//   combination: string;
+// }
+
+import { Variant } from "./product";
 
 export interface Product {
   name: string;
@@ -13,6 +15,8 @@ export interface CartItem {
   unitPrice: number;
   quantity: number;
   itemTotal: number;
+  selectedOptions: SelectedOption[];
+  variant: Variant;
   _id: string;
 }
 
@@ -23,4 +27,16 @@ export interface ApiResponse {
     totalItems: number;
     items: CartItem[];
   };
+}
+
+interface SelectedOption {
+  name: string;
+  value: string;
+  type: string;
+}
+
+export interface AddToCartVariant {
+  variantId?: string;
+  quantity?: number;
+  selectedOptions?: SelectedOption[];
 }

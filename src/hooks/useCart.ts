@@ -1,5 +1,5 @@
 import { cartServices } from "@/services/cartService";
-import { CartItem } from "@/types/cart";
+import { AddToCartVariant, CartItem } from "@/types/cart";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const cartKeys = {
@@ -15,7 +15,13 @@ export function useAddToCart() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (productId: string) => cartServices.addToCart(productId),
+    mutationFn: ({
+      productId,
+      payload,
+    }: {
+      productId: string;
+      payload?: AddToCartVariant;
+    }) => cartServices.addToCart(productId, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: cartKeys.carts });
     },
@@ -29,6 +35,7 @@ export function useRemoveCartItem() {
     mutationFn: (productId: string) => cartServices.deleteCartItem(productId),
     onSuccess: (productId) => {
       queryClient.invalidateQueries({ queryKey: cartKeys.lists(productId) });
+      queryClient.invalidateQueries({ queryKey: cartKeys.carts });
     },
   });
 }

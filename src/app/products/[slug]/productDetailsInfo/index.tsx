@@ -1,12 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Check, ChevronDown, ChevronUp, Heart, Scale } from "lucide-react";
+import {
+  Check,
+  ChevronDown,
+  ChevronUp,
+  Heart,
+  Loader2,
+  Scale,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, formatUSD } from "@/lib/utils";
-import { Product } from "@/types/product";
+import { Product, Variant as ProductVariant } from "@/types/product";
 import { StarRating } from "@/components/ui/StarRating";
+import { useAddToCart } from "@/hooks/useCart";
 
 const productImages = [
   {
@@ -48,8 +56,18 @@ type ProductDetailsProps = {
 export function ProductDetailsInfo({ product }: ProductDetailsProps) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState(0);
   const [inWishlist, setInWishlist] = useState(false);
+
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
+    null
+  );
+  const { mutate, isPending } = useAddToCart();
+
+  useEffect(() => {
+    if (product.variants.length > 0) {
+      setSelectedVariant(product.variants[0]);
+    }
+  }, [product]);
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
@@ -59,10 +77,6 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
-  };
-
-  const handleColorSelect = (index: number) => {
-    setSelectedColor(index);
   };
 
   const toggleWishlist = () => {
@@ -95,6 +109,20 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
       default:
         return "Unknown";
     }
+  };
+
+  console.log(product._id);
+
+  const handleAddToCart = async () => {
+    if (!selectedVariant) return;
+
+    const payload = {
+      variantId: selectedVariant._id,
+      quantity,
+      selectedOptions: selectedVariant.options,
+    };
+
+    mutate({ productId: product._id, payload });
   };
 
   return (
@@ -177,11 +205,6 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
 
           <p className="text-gray-600 mb-4">{product.description}</p>
 
-          {/* <div className="flex items-center gap-2 mb-4">
-            <Eye className="w-5 h-5 text-gray-500" />
-            <span>15 people are viewing this right now</span>
-          </div> */}
-
           <div className="mb-4">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-sm">Availability:</span>
@@ -206,7 +229,7 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
                           key={opt._id}
                           className={cn(
                             "size-6 rounded-full transition-all flex items-center justify-center",
-                            selectedColor === opt._id
+                            variant._id === selectedVariant?._id
                               ? "outline-2 outline-offset-2"
                               : ""
                           )}
@@ -214,9 +237,9 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
                             backgroundColor: opt.hexCode,
                             outlineColor: opt.hexCode,
                           }}
-                          onClick={() => handleColorSelect(opt._id)}
+                          onClick={() => setSelectedVariant(variant)}
                         >
-                          {selectedColor === opt._id && (
+                          {variant._id === selectedVariant?._id && (
                             <Check
                               size={17}
                               color={
@@ -262,8 +285,16 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
           </div>
 
           <div className="grid gap-4 mb-6">
-            <Button>ADD TO CART</Button>
-            <Button>BUY IT NOW</Button>
+            <Button onClick={handleAddToCart} disabled={isPending}>
+              {isPending ? (
+                <>
+                  <Loader2 className="animate-spin" size={24} />
+                </>
+              ) : (
+                " ADD TO CART"
+              )}
+            </Button>
+            <Button disabled={isPending}>BUY IT NOW</Button>
           </div>
 
           <div className="flex gap-4 mb-6">

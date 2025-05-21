@@ -2,11 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { QuantitySelector } from "@/components/ui/QuantitySelector";
-import {
-  useRemoveCartItem,
-  useUpdateCartItem,
-  useUpdateCartItem_DEBUG,
-} from "@/hooks/useCart";
+import { useRemoveCartItem, useUpdateCartItem_DEBUG } from "@/hooks/useCart";
 import { useDebouncedCallback } from "@/hooks/useDebouncedCallback";
 import { formatUSD } from "@/lib/utils";
 import { CartItem as ICartItem } from "@/types/cart";
@@ -38,12 +34,14 @@ export const CartItem = ({ item }: CartItemProps) => {
     });
   };
 
+  console.log(item);
+
   return (
     <div className=" grid min-[744px]:grid-cols-[1fr_15rem_10rem] grid-cols-[1fr_4rem] first:border-t py-4  items-start">
       <div className="flex items-start min-[500px]:gap-x-20 min-[390px]:gap-x-8 gap-x-3">
         <div className="relative size-[7rem]  rounded-md overflow-hidden">
           <Image
-            src={item?.product?.images[0].url}
+            src={item?.variant?.images[0] || item?.product?.images[0].url}
             alt={item?.product?.name || "product-placeholder"}
             fill
             sizes="(max-width: 768px) 100vw, 200px"

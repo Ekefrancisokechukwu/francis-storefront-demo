@@ -3,8 +3,8 @@ import { Product, ProductFilters, ProductQueryParams } from "@/types/product";
 
 interface ProductApiResponse {
   products: Product[];
-  count: number;
-  total: number;
+  totalItems: number;
+  filteredTotal: number;
   totalPages: number;
   currentPage: number;
 }

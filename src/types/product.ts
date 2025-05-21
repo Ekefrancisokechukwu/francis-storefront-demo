@@ -17,7 +17,7 @@ interface PriceAdjustment {
   value: number;
 }
 
-type Variant = {
+export type Variant = {
   combination: {
     id: string;
     isActive: boolean;
