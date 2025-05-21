@@ -9,12 +9,20 @@ interface ProductApiResponse {
   currentPage: number;
 }
 
+interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+}
+
 const ENDPOINTS = {
   PRODUCTS: (queryString?: string) => `/products?${queryString}`,
   PRODUCTS_FEATURED: "/products/?featured=true",
   PRODUCT: (idOrSlug: string) => `/products/${idOrSlug}`,
   PRODUCT_CATEGORY: (category: string) => `/products/category/${category}`,
   PRODUCT_FILTERS: "/products/filters",
+  PRODUCT_CATEGORIES: "/categories",
 };
 
 const buildQueryString = (params: ProductQueryParams) => {
@@ -45,6 +53,12 @@ export const productService = {
   // Get product by
   getProduct: async (idOrSlug: string): Promise<Product> => {
     const response = await axiosClient.get(ENDPOINTS.PRODUCT(idOrSlug));
+    return response.data;
+  },
+
+  // GET CATEGORIES
+  getCategories: async (): Promise<Category[]> => {
+    const response = await axiosClient.get(ENDPOINTS.PRODUCT_CATEGORIES);
     return response.data;
   },
 

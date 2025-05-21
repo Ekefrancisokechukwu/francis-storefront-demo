@@ -45,3 +45,12 @@ export function useGetAllFilters() {
     queryFn: () => productService.getAllFilters(),
   });
 }
+
+// get all products categories
+export function useGetCategories() {
+  return useQuery({
+    queryKey: productKeys.categories(),
+    queryFn: () => productService.getCategories(),
+    staleTime: Infinity,
+  });
+}
