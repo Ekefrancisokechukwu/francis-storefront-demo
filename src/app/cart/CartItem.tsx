@@ -21,7 +21,11 @@ export const CartItem = ({ item }: CartItemProps) => {
   // const { mutate: updateQty, isPending: isUpdating } = useUpdateCartItem();
   const { mutate: updateQty, isPending: isUpdating } =
     useUpdateCartItem_DEBUG();
-  const debouncedUpdateQty = useDebouncedCallback(updateQty, 500);
+
+  const debouncedUpdateQty = useDebouncedCallback(
+    (param) => updateQty(param as { itemId: string; quantity: number }),
+    500
+  );
 
   const buttonDisabled = isUpdating || isRemoving;
 
@@ -33,8 +37,6 @@ export const CartItem = ({ item }: CartItemProps) => {
       return next;
     });
   };
-
-  console.log(item);
 
   return (
     <div className=" grid min-[744px]:grid-cols-[1fr_15rem_10rem] grid-cols-[1fr_4rem] first:border-t py-4  items-start">
