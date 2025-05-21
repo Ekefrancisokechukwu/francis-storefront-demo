@@ -7,8 +7,9 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Wrapper } from "@/components/ui/Wrapper";
 import { useCurrentUser } from "@/hooks/useAuth";
-import { Loader2, User } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { LogoutButton } from "./LogoutButton";
 
 const Account = () => {
   const { data: user, isLoading } = useCurrentUser();
@@ -40,13 +41,7 @@ const Account = () => {
         <div className="flex items-start justify-between">
           <div>
             <h1 className="text-neutral-800 text-2xl font-medium">Account</h1>
-            <Link
-              href={"/signout"}
-              className="flex text-neutral-600 items-center mt-2 gap-x-1.5 text-sm underline underline-offset-2 hover:no-underline transition-all duration-200"
-            >
-              <User size={17} />
-              Sign out
-            </Link>
+            <LogoutButton />
           </div>
           <div>
             <h1 className="text-neutral-800 text-2xl font-medium">

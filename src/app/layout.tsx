@@ -5,6 +5,7 @@ import Header from "@/components/layouts/header";
 import Navigation from "@/components/layouts/Navigation";
 import Footer from "@/components/layouts/footer";
 import ReactQueryProvider from "@/provider/react-query";
+import { Toaster } from "@/components/ui/sonner";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -39,6 +40,8 @@ export default function RootLayout({
         className={`${jost.className}   antialiased`}
         suppressHydrationWarning
       >
+        <Toaster position="top-center" />
+
         <ReactQueryProvider>
           <Header />
           <Navigation />

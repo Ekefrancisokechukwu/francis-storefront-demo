@@ -24,32 +24,39 @@ axiosClient.interceptors.request.use(
   }
 );
 
-// axiosClient.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     const { response } = error;
+axiosClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const { response } = error;
 
-//     if (response) {
-//       switch (response.status) {
-//         case 401:
-//           // Handle unauthorized errors (e.g., redirect to login)
-//           console.error("Unauthorized access");
-//           break;
-//         case 404:
-//           console.error("Resource not found");
-//           break;
-//         case 500:
-//           console.error("Server error");
-//           break;
-//         default:
-//           console.error("An error occurred:", response.status);
-//       }
-//     } else {
-//       console.error("Network error or request cancelled");
-//     }
+    if (response) {
+      switch (response.status) {
+        case 401:
+          // Handle unauthorized errors (e.g., redirect to login)
+          // toast("Authentication Required", {
+          //   description: "Please login to continue",
+          //   action: {
+          //     label: "Login",
+          //     onClick: () => (window.location.href = "/account/login"),
+          //   },
+          // });
 
-//     return Promise.reject(error);
-//   }
-// );
+          break;
+        case 404:
+          console.error("Resource not found");
+          break;
+        case 500:
+          console.error("Server error");
+          break;
+        default:
+          console.error("An error occurred:", response.status);
+      }
+    } else {
+      console.error("Network error or request cancelled");
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export default axiosClient;

@@ -62,3 +62,13 @@ export function useRegister() {
     }
   );
 }
+
+export function useLogout() {
+  const router = useRouter();
+  return useMutation({
+    mutationFn: () => authService.logout(),
+    onSuccess: () => {
+      router.push("/account/login");
+    },
+  });
+}

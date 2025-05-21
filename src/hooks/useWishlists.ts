@@ -4,6 +4,7 @@ import {
 } from "@/services/wishlistServices";
 import { Product } from "@/types/product";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const wishlistKeys = {
   all: ["wishlists"] as const,
@@ -91,6 +92,7 @@ export function useToggleWishlist() {
     },
     onError: (err, productId, context) => {
       console.error("Error toggling wishlist item:", err);
+      toast.error("Please login to continue");
       if (context?.previousWishlists) {
         queryClient.setQueryData(
           wishlistKeys.lists(),
@@ -136,6 +138,9 @@ export function useRemoveFromWishLists() {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: wishlistKeys.lists() });
+    },
+    onError: () => {
+      toast.error("Please login to continue");
     },
   });
 }

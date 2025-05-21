@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { formatUSD } from "@/lib/utils";
 import { Wrapper } from "@/components/ui/Wrapper";
+import { AxiosError } from "axios";
 
 export const ItemContainer = () => {
-  const { data, isLoading, error } = useGetCartItems();
+  const { data, isLoading, error: responseError } = useGetCartItems();
 
   const cartItems = data?.cart.items ?? [];
   const totalPrice = data?.cart.totalPrice;
@@ -34,13 +35,31 @@ export const ItemContainer = () => {
     );
   }
 
+  const error = responseError as AxiosError<{ status: number }>;
+
   if (error) {
     return (
       <Wrapper className="mt-10 text-center">
-        <h1 className="font-semibold text-xl text-red-500">Error Occurred</h1>
-        <p className="mt-2 text-sm text-gray-600">
-          {error.message || "Something went wrong while fetching products."}
-        </p>
+        {error.status === 401 ? (
+          <div className="mt-5">
+            <p className="text-center text-neutral-800 font-medium text-lg">
+              Please login to continue
+            </p>
+            <Button size={"lg"} className="mt-2.5" asChild>
+              <Link href={"/account/login"}>Login</Link>
+            </Button>
+          </div>
+        ) : (
+          <>
+            {" "}
+            <h1 className="font-semibold text-xl text-red-500">
+              Error Occurred
+            </h1>
+            <p className="mt-2 text-sm text-gray-600">
+              {error.message || "Something went wrong while fetching products."}
+            </p>
+          </>
+        )}
       </Wrapper>
     );
   }

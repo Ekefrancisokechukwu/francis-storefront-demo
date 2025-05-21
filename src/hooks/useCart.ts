@@ -1,6 +1,7 @@
 import { cartServices } from "@/services/cartService";
 import { AddToCartVariant, CartItem } from "@/types/cart";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const cartKeys = {
   carts: ["carts"] as const,
@@ -25,6 +26,9 @@ export function useAddToCart() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: cartKeys.carts });
     },
+    onError: () => {
+      toast.error("Please login to continue");
+    },
   });
 }
 
@@ -36,6 +40,9 @@ export function useRemoveCartItem() {
     onSuccess: (productId) => {
       queryClient.invalidateQueries({ queryKey: cartKeys.lists(productId) });
       queryClient.invalidateQueries({ queryKey: cartKeys.carts });
+    },
+    onError: () => {
+      toast.error("Please login to continue");
     },
   });
 }
@@ -53,6 +60,9 @@ export function useUpdateCartItem_DEBUG() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: cartKeys.carts });
+    },
+    onError: () => {
+      toast.error("Please login to continue");
     },
   });
 }
@@ -82,13 +92,9 @@ export function useUpdateCartItem() {
     },
     onError: (_err, _vars, ctx) => {
       if (ctx?.prev) queryClient.setQueryData(cartKeys.carts, ctx.prev);
+      toast.error("Please login to continue");
     },
 
-    // onSuccess: (data) => {
-    //   console.log("data onsucess:", data);
-
-    //   queryClient.invalidateQueries({ queryKey: cartKeys.carts });
-    // },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: cartKeys.carts });
       console.log("here yes onsettled");

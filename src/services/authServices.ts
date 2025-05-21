@@ -46,7 +46,7 @@ export const authService = {
   logout: async (): Promise<void> => {
     await axiosClient.post(ENDPOINTS.LOGOUT);
     // Clear tokens from cookie
-    deleteCookie("token");
+    deleteCookie(ACCESS_TOKEN_COOKIE_NAME);
     // deleteCookie("refreshToken");
   },
 

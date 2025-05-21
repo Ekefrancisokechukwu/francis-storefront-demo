@@ -111,7 +111,7 @@ export function ProductDetailsInfo({ product }: ProductDetailsProps) {
     }
   };
 
-  console.log(product._id);
+  // console.log(product);
 
   const handleAddToCart = async () => {
     if (!selectedVariant) return;
