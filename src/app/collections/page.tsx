@@ -34,11 +34,16 @@ const CollectionsPage = () => {
         {/* Sort */}
         <div className="flex items-center justify-between">
           <div>
-            <FilterAndSortSlider />
+            <Suspense>
+              {" "}
+              <FilterAndSortSlider />
+            </Suspense>
           </div>
           <div className="flex gap-x-8 items-center">
             <div className="lg:block hidden">
-              <SortNav />
+              <Suspense>
+                <SortNav />
+              </Suspense>
             </div>
             {/* <TotalProductSummary /> */}
           </div>
@@ -46,8 +51,8 @@ const CollectionsPage = () => {
 
         {/* Products */}
         <div className="mt-5 grid lg:grid-cols-[20rem_1fr] gap-x-7">
-          <Filter />
           <Suspense>
+            <Filter />
             <ProductsContianer />
           </Suspense>
         </div>

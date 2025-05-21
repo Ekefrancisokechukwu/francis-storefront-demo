@@ -7,6 +7,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useProducts } from "@/hooks/useProducts";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import { ProductQueryParams } from "@/types/product";
+import { Suspense } from "react";
 
 export const ProductsContianer = () => {
   const getParam = useUrlParams().getParam;
@@ -73,11 +74,14 @@ export const ProductsContianer = () => {
       </div>
 
       <div className="mt-10 flex justify-center">
-        {data?.totalPages
-          ? data.totalPages > 1 && (
-              <PaginationBtns totalPages={data?.totalPages ?? 0} />
-            )
-          : null}
+        <Suspense>
+          {" "}
+          {data?.totalPages
+            ? data.totalPages > 1 && (
+                <PaginationBtns totalPages={data?.totalPages ?? 0} />
+              )
+            : null}
+        </Suspense>
       </div>
     </div>
   );
